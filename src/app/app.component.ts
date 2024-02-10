@@ -6,8 +6,15 @@ import { FormsModule } from '@angular/forms';
 interface GrammarExercise {
   id: number;
   question: string;
-  words: string[];
   userResponse: string;
+}
+
+interface PutWordsExercise extends GrammarExercise {
+  words: string[];
+}
+
+interface WriteQuestionsExercise extends GrammarExercise {
+    expectedResponse: string;
 }
 
 @Component({
@@ -29,6 +36,7 @@ export class AppComponent {
         {
           id: 'a',
           title: 'Put the words into the correct place in the questions.',
+          type: 'put-words',
           exercises: [
             {
               id: 1,
@@ -74,8 +82,72 @@ export class AppComponent {
             },
             {
               id: 9,
-              question: 'When you lived in Europe, what country did you live in?',
+              question:
+                'When you lived in Europe, what country did you live in?',
               words: ['did', 'in'],
+              userResponse: '',
+            },
+          ],
+        },
+        {
+          id: 'b',
+          title: 'Write questions in the present or past simple.',
+          type: 'write-questions',
+          exercises: [
+            {
+              id: 1,
+              question: 'Where do you go to university?',
+              words: ['you / go to university'],
+              expectedResponse: 'do you go to university',
+              userResponse: 'Where do you go to university?',
+            },
+            {
+              id: 2,
+              question: 'What did you do last night?',
+              words: ['you / do last night'],
+              expectedResponse: 'did you do last night',
+              userResponse: '',
+            },
+            {
+              id: 3,
+              question: 'What TV programmes does your girlfriend watch?',
+              words: ['TV programmes / your girlfriend / watch'],
+              expectedResponse: 'TV programmes does your girlfriend watch',
+              userResponse: '',
+            },
+            {
+              id: 4,
+              question: 'When is your birthday?',
+              words: ['your birthday'],
+              expectedResponse: 'is your birthday',
+              userResponse: '',
+            },
+            {
+              id: 5,
+              question: 'Where are you from?',
+              words: ['you / from'],
+              expectedResponse: 'are you from',
+              userResponse: '',
+            },
+            {
+              id: 6,
+              question: 'Where did your friends go on holiday last year?',
+              words: ['your friends / go / holiday last year'],
+              expectedResponse: 'did your friends go on holiday last year',
+              userResponse: '',
+            },
+            {
+              id: 7,
+              question: 'What kind of books do you read?',
+              words: ['you / read'],
+              expectedResponse: 'do you read',
+              userResponse: '',
+            },
+            {
+              id: 8,
+              question: 'Why were you angry yesterday?',
+              words: ['you / angry yesterday'],
+              expectedResponse: 'were you angry yesterday',
               userResponse: '',
             },
           ],
@@ -83,39 +155,40 @@ export class AppComponent {
       ],
     },
   };
-getSentenceWithoutWord(exercise: GrammarExercise) {
+
+  getParsedQuestion(exercise: GrammarExercise, type: string) {
+    if (type === 'put-words') {
+      return this.getSentenceWithoutWord(exercise as PutWordsExercise);
+    } else {
+    // if (type === 'write-questions') {
+      return this.getSentenceWithoutExpectedWords( exercise as WriteQuestionsExercise);
+    }
+  }
+
+  getSentenceWithoutWord(exercise: PutWordsExercise) {
     const words = exercise.question.split(/\b/);
-    const filteredWords = words.filter(word => !exercise.words.includes(word.trim()));
+    const filteredWords = words.filter(
+      (word) => !exercise.words.includes(word.trim())
+    );
     let sentenceWithoutWords = filteredWords.join('').trim();
     sentenceWithoutWords = sentenceWithoutWords.replace(/\s+/g, ' ');
-    sentenceWithoutWords = sentenceWithoutWords.replace(/\s*([\.,;:!?])(?!\w)/g, '$1');
+    sentenceWithoutWords = sentenceWithoutWords.replace(
+      /\s*([\.,;:!?])(?!\w)/g,
+      '$1'
+    );
 
     return sentenceWithoutWords;
-}
+  }
 
+  getSentenceWithoutExpectedWords(exercise: WriteQuestionsExercise) {
+    return exercise.question.replace(exercise.expectedResponse, '').trim();
+  }
 
-
-
-
-
-
-//   getSentenceWithoutWord(exercise: GrammarExercise) {
-//     let wordsBetweenSpaces = exercise.question
-//       .split(' ')
-//       .filter((word) => !exercise.words.includes(word))
-//       .join(' ');
-
-//     return wordsBetweenSpaces;
-
-//     // return wordsBetweenSpaces
-//     //   .split(/[\s.,!?:;]+/)
-//     //   .filter((word) => !exercise.words.includes(word))
-//     //   .join(' ');
-//   }
-
-  copySentenceToInput(exercise: GrammarExercise) {
-    exercise.userResponse = this.getSentenceWithoutWord(exercise);
+  copySentenceToInput(exercise: GrammarExercise, type: string) {
+    if (type === 'put-words') {
+        exercise.userResponse = this.getSentenceWithoutWord(exercise as PutWordsExercise);
+    } else {
+      exercise.userResponse = this.getSentenceWithoutExpectedWords( exercise as WriteQuestionsExercise);
+    }
   }
 }
-
-// .split(/[\s.,!?:;]+/)
