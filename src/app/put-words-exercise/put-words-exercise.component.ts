@@ -1,28 +1,30 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ExerciseComponent } from '../exercise/exercise.component';
 import { PutWordsExercise } from '../put-words-exercise';
+import { TextUserResponse } from '../text-user-response';
 
 @Component({
   selector: 'app-put-words-exercise',
   standalone: true,
   imports: [ExerciseComponent],
   templateUrl: './put-words-exercise.component.html',
-  styleUrl: './put-words-exercise.component.css'
+  styleUrl: './put-words-exercise.component.css',
 })
-export class PutWordsExerciseComponent {
+export class PutWordsExerciseComponent implements OnInit {
   @Input() exercise!: PutWordsExercise;
-  private _activityType!: string;
+  mappedExercise: any
 
-  @Input()
-  set activityType(value: string) {
-    this._activityType = value;
-  }
-  get activityType(): string {
-    return this._activityType;
+  ngOnInit(): void {
+    this.mappedExercise = {
+      ...this.exercise,
+      statement: this.getStatementTip(this.exercise).text,
+      statementTip: this.getStatementTip(this.exercise),
+      expectedResponse: this.exercise.statement
+    }
   }
 
-  getSentenceWithoutWord(exercise: PutWordsExercise) {
-    const words = exercise.baseSentence.split(/\b/);
+  private getStatementTip(exercise: PutWordsExercise): TextUserResponse {
+    const words = exercise.statement.split(/\b/);
     const filteredWords = words.filter(
       (word) => !exercise.words.includes(word.trim())
     );
@@ -33,6 +35,6 @@ export class PutWordsExerciseComponent {
       '$1'
     );
 
-    return sentenceWithoutWords;
+    return { text: sentenceWithoutWords };
   }
 }

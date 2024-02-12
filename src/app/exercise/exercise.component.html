@@ -158,16 +158,15 @@
 </style>
 
 <div style="display: flex; align-items: center; margin: 25px 0 10px;">
-    <span>{{ exercise.id }}. {{ tipSentence }}
+    <span>{{ exercise.id }}. {{ exercise.statement }}
         @if (exercise.words.length) {
         ( {{exercise.words.join(', ')}} )
         }
     </span>
     <app-copy-sentence-button (onClick)="handleClick()"></app-copy-sentence-button>
-    <!-- <app-copy-sentence-button (onClick)="copySentenceToInput(exercise, activityType)"></app-copy-sentence-button> -->
 </div>
 <div style="display: flex; align-items: center; gap: 10px; justify-content: space-between;">
-    <input style="flex: 1;" type="text" #response="ngModel" [(ngModel)]="exercise.userResponse" class="pill"
-        [class]="{wrong: response.value !== exercise.baseSentence}">
-    <span [style.visibility]="response.value === exercise.baseSentence ? 'visible' : 'hidden'">🎉</span>
+    <input style="flex: 1;" type="text" #response="ngModel" [(ngModel)]="exercise.userResponse.text" class="pill"
+        [class]="{wrong: response.value !== exercise.expectedResponse}">
+    <span [style.visibility]="response.value === exercise.expectedResponse ? 'visible' : 'hidden'">🎉</span>
 </div>

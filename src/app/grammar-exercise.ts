@@ -1,5 +1,8 @@
+import { UserResponse } from "./user-response";
+
 export interface GrammarExercise {
   id: number;
-  baseSentence: string;
-  userResponse: string;
+  statement: string;
+  userResponse: UserResponse;
+  expectedResponse: string;
 }

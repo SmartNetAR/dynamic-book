@@ -1,6 +1,7 @@
 import { GrammarExercise } from "./grammar-exercise";
+import { TextUserResponse } from "./text-user-response";
 
 export interface WriteQuestionsExercise extends GrammarExercise {
-  expectedResponse: string;
   words: string[];
+  userResponse: TextUserResponse;
 }

@@ -1,27 +1,32 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ExerciseComponent } from '../exercise/exercise.component';
 import { WriteQuestionsExercise } from '../write-questions-exercise';
+import { TextUserResponse } from '../text-user-response';
 
 @Component({
   selector: 'app-write-questions-exercise',
   standalone: true,
   imports: [ExerciseComponent],
   templateUrl: './write-questions-exercise.component.html',
-  styleUrl: './write-questions-exercise.component.css'
+  styleUrl: './write-questions-exercise.component.css',
 })
-export class WriteQuestionsExerciseComponent {
+export class WriteQuestionsExerciseComponent implements OnInit {
   @Input() exercise!: any;
-  private _activityType!: string;
+  mappedExercise: any
 
-  @Input()
-  set activityType(value: string) {
-    this._activityType = value;
-  }
-  get activityType(): string {
-    return this._activityType;
+  ngOnInit(): void {
+    this.mappedExercise = {
+      ...this.exercise,
+      statementTip: this.getStatementTip(this.exercise),
+      expectedResponse: this.exercise.statement
+    }
   }
 
-  getSentenceWithoutExpectedWords(exercise: WriteQuestionsExercise) {
-    return exercise.baseSentence.replace(exercise.expectedResponse, '').trim();
+  private getStatementTip(
+    exercise: WriteQuestionsExercise
+  ): TextUserResponse {
+    return {
+      text: exercise.statement.replace(exercise.expectedResponse, '').trim(),
+    };
   }
 }

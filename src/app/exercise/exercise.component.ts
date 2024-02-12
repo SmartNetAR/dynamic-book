@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PutWordsExercise } from '../put-words-exercise';
-import { WriteQuestionsExercise } from '../write-questions-exercise';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GrammarExercise } from '../grammar-exercise';
 import { CopySentenceButtonComponent } from '../copy-sentence-button/copy-sentence-button.component';
 
 @Component({
@@ -12,32 +9,15 @@ import { CopySentenceButtonComponent } from '../copy-sentence-button/copy-senten
   templateUrl: './exercise.component.html',
   styleUrl: './exercise.component.css',
 })
-export class ExerciseComponent implements AfterViewInit  {
-  @Input() exercise!: PutWordsExercise | WriteQuestionsExercise;
-  private _activityType!: string;
-
-  @Input() tipSentence!: string;
-
-  @Input()
-  set activityType(value: string) {
-    this._activityType = value;
-  }
-  get activityType(): string {
-    return this._activityType;
-  }
+export class ExerciseComponent {
+  @Input() exercise!: any /* PutWordsExercise | WriteQuestionsExercise */;
 
   handleClick() {
     this.copySentenceToInput();
   }
 
-  ngAfterViewInit(): void {
-    if (!this._activityType) {
-      throw new Error('activityType is required');
-    }
-  }
-
   copySentenceToInput() {
-      this.exercise.userResponse = this.tipSentence;
+      this.exercise.userResponse = this.exercise.statementTip;
   }
 
 }

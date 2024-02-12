@@ -114,11 +114,14 @@
         <h3>{{ activity.id }}. {{ activity.title }}</h3>
         @for ( exercise of activity.exercises; track exercise.id) {
             @switch (activity.type) {
+                @case ("put-words") {
+                    <app-put-words-exercise [exercise]="exercise"></app-put-words-exercise>
+                }
                 @case ("write-questions") {
                     <app-write-questions-exercise [exercise]="exercise"></app-write-questions-exercise>
                 }
-                @case ("put-words") {
-                    <app-put-words-exercise [exercise]="exercise"></app-put-words-exercise>
+                @case ("write-sentence") {
+                    <app-write-sentence-exercise [exercise]="exercise"></app-write-sentence-exercise>
                 }
             }
         }
