@@ -24,16 +24,12 @@ export class PutWordsExerciseComponent implements OnInit {
   }
 
   private getStatementTip(exercise: PutWordsExercise): TextUserResponse {
-    const words = exercise.statement.split(/\b/);
-    const filteredWords = words.filter(
-      (word) => !exercise.words.includes(word.trim())
-    );
+    const exerciseWordsLowerCase = exercise.words.map(word => word.toLowerCase());
+    const statementWords = exercise.statement.split(/\b/);
+    const filteredWords = statementWords.filter(word => !exerciseWordsLowerCase.includes(word.trim().toLowerCase()));
     let sentenceWithoutWords = filteredWords.join('').trim();
     sentenceWithoutWords = sentenceWithoutWords.replace(/\s+/g, ' ');
-    sentenceWithoutWords = sentenceWithoutWords.replace(
-      /\s*([\.,;:!?])(?!\w)/g,
-      '$1'
-    );
+    sentenceWithoutWords = sentenceWithoutWords.replace(/\s*([\.,;:!?])(?!\w)/g, '$1');
 
     return { text: sentenceWithoutWords };
   }

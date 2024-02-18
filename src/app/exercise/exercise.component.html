@@ -163,10 +163,10 @@
         ( {{exercise.words.join(', ')}} )
         }
     </span>
-    <app-copy-sentence-button (onClick)="handleClick()"></app-copy-sentence-button>
+    <app-copy-sentence-button (onClick)="handleClickCopy()"></app-copy-sentence-button>
 </div>
 <div style="display: flex; align-items: center; gap: 10px; justify-content: space-between;">
-    <input style="flex: 1;" type="text" #response="ngModel" [(ngModel)]="exercise.userResponse.text" class="pill"
-        [class]="{wrong: response.value !== exercise.expectedResponse}">
-    <span [style.visibility]="response.value === exercise.expectedResponse ? 'visible' : 'hidden'">🎉</span>
+    <input style="flex: 1;" type="text" [(ngModel)]="exercise.userResponse.text" (input)="evaluateResponse()"
+        class="pill" [class]="{wrong: !isResponseCorrect}">
+    <span [style.visibility]="isResponseCorrect ? 'visible' : 'hidden'">🎉</span>
 </div>

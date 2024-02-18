@@ -17,6 +17,7 @@ export class WriteQuestionsExerciseComponent implements OnInit {
   ngOnInit(): void {
     this.mappedExercise = {
       ...this.exercise,
+      statement: this.getStatementTip(this.exercise).text,
       statementTip: this.getStatementTip(this.exercise),
       expectedResponse: this.exercise.statement
     }
