@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Lesson } from '../lesson';
 import { LessonService } from '../lesson.service';
 import { PutWordsExerciseComponent } from '../put-words-exercise/put-words-exercise.component';
 import { WriteQuestionsExerciseComponent } from '../write-questions-exercise/write-questions-exercise.component';
@@ -7,13 +10,24 @@ import { WriteSentenceExerciseComponent } from '../write-sentence-exercise/write
 @Component({
   selector: 'app-lessons',
   standalone: true,
-  imports: [WriteQuestionsExerciseComponent, PutWordsExerciseComponent, WriteSentenceExerciseComponent],
+  imports: [
+    WriteQuestionsExerciseComponent,
+    PutWordsExerciseComponent,
+    WriteSentenceExerciseComponent,
+    CommonModule],
   templateUrl: './lessons.component.html',
   styleUrl: './lessons.component.css',
 })
 export class LessonsComponent {
-    lessons = this.lessonService.getLessons();
-
-    constructor (private readonly lessonService: LessonService) {
+  @Input()
+  set url(value: string) {
+    if (value) {
+      this.lessons$ = this.lessonService.getLessons(value) || of([]);
     }
+  }
+
+  lessons$: Observable<Lesson[]> = of([]);
+
+  constructor(private readonly lessonService: LessonService) {
+  }
 }

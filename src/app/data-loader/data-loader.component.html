@@ -31,6 +31,11 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    /* own */
+    .pill.wrong {
+        --pill-accent: var(--hot-red);
+    }
+
     h1 {
         font-size: 3.125rem;
         color: var(--gray-900);
@@ -48,13 +53,49 @@
         color: var(--gray-700);
     }
 
+    main {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        box-sizing: inherit;
+        position: relative;
+    }
 
-    h1 {
+    .angular-logo {
+        max-width: 9.2rem;
+    }
+
+    .content {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 700px;
+        margin-bottom: 3rem;
+    }
+
+    .content h1 {
         margin-top: 1.75rem;
     }
 
-    p {
+    .content p {
         margin-top: 1.5rem;
+    }
+
+    .divider {
+        width: 1px;
+        background: var(--red-to-pink-to-purple-vertical-gradient);
+        margin-inline: 0.5rem;
+    }
+
+    .pill-group {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        flex-wrap: wrap;
+        gap: 1.25rem;
     }
 
     .pill {
@@ -99,32 +140,25 @@
         margin-inline-start: 0.25rem;
     }
 
-</style>
-    @for (lesson of (lessons$ | async) ; track lesson.id) {
-    <h1>{{ lesson.id }} {{ lesson.name }}</h1>
-    <div style="display: flex; gap: 10px; align-items: baseline;">
-        <h2>{{ lesson.sections.name }}</h2>
-        <p>{{ lesson.sections.title }}</p>
-    </div>
-
-    <div>
-        @for (activity of lesson.sections.activities; track activity.id ) {
-        <div class="activity">
-            <h3>{{ activity.id }}. {{ activity.title }}</h3>
-            @for ( exercise of activity.exercises; track exercise.id) {
-                @switch (activity.type) {
-                    @case ("put-words") {
-                        <app-put-words-exercise [exercise]="exercise"></app-put-words-exercise>
-                    }
-                    @case ("write-questions") {
-                        <app-write-questions-exercise [exercise]="exercise"></app-write-questions-exercise>
-                    }
-                    @case ("write-sentence") {
-                        <app-write-sentence-exercise [exercise]="exercise"></app-write-sentence-exercise>
-                    }
-                }
-            }
-        </div>
-        }
-    </div>
+    .social-links {
+        display: flex;
+        align-items: center;
+        gap: 0.73rem;
+        margin-top: 1.5rem;
     }
+
+    .social-links path {
+        transition: fill 0.3s ease;
+        fill: var(--gray-400);
+    }
+
+    .social-links a:hover svg path {
+        fill: var(--gray-900);
+    }
+</style>
+
+<div style="display: flex; align-items: center; gap: 10px; justify-content: space-between;">
+    <input style="flex: 1;" type="text" [(ngModel)]="url" placeholder="Enter URL"
+        class="pill">
+    <button (click)="handleUrlChange()">Update</button>
+</div>
