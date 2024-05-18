@@ -19,6 +19,7 @@ import { LessonsComponent } from './lessons/lessons.component';
 })
 export class AppComponent {
   lessons?: Lesson[];
+  devMode = false;
 
   constructor(
     private readonly lessonService: LessonService,
@@ -49,5 +50,9 @@ export class AppComponent {
 
   setLessons(lessonsToTry: Lesson[]) {
     this.dataService.setData(lessonsToTry);
+  }
+
+  toggleDevMode() {
+    this.devMode = !this.devMode;
   }
 }

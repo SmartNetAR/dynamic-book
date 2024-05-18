@@ -4,19 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { Lesson } from '../lesson';
 
 @Component({
-    selector: 'app-exercise-previewer',
-    standalone: true,
-    imports: [CommonModule, FormsModule],
-    templateUrl: './exercise-previewer.component.html',
-    styleUrl: './exercise-previewer.component.css'
+  selector: 'app-exercise-previewer',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './exercise-previewer.component.html',
+  styleUrl: './exercise-previewer.component.css'
 })
 export class ExercisePreviewerComponent {
-    model = "";
+  model = "";
+  select = "";
 
-    private examplePutWords =
-        `[
+  exampleOptions = [
+    { value: 'putWords', label: 'Put Words' },
+    { value: 'write-questions', label: 'Write Questions' }
+  ];
+
+  private examples = {
+    putWords: `[
   {
-    "id": "6A",
+    "id": "1A",
     "name": "Think positive - or negative",
     "sections": {
       "id": 1,
@@ -44,21 +50,53 @@ export class ExercisePreviewerComponent {
       ]
     }
   }
-]`
-
-    @Input()
-    set lessons(value: Lesson[]) {
-        this.model = JSON.stringify(value, null, 2);
+]`,
+    'write-questions': `[
+  {
+    "id": "1A",
+    "name": "Think positive - or negative",
+    "sections": {
+      "id": 1,
+      "name": "grammar",
+      "title": "",
+      "activities": [
+        {
+          "id": "b",
+          "title": "Write questions in the present or past simple.",
+          "type": "write-questions",
+          "exercises": [
+            {
+              "id": 1,
+              "statement": "What did you do last night?",
+              "words": [
+                "you / do last night"
+              ],
+              "expectedResponse": "did you do last night",
+              "userResponse": {
+                "text": ""
+              }
+            }
+          ]
+        }
+      ]
     }
+  }
+]`,
+  };
 
-    @Output() tryLessons = new EventEmitter<Lesson[]>();
+  @Input()
+  set lessons(value: Lesson[]) {
+    this.model = JSON.stringify(value, null, 2);
+  }
 
-    try() {
-        const lessons = JSON.parse(this.model);
-        this.tryLessons.emit(lessons);
-    }
+  @Output() tryLessons = new EventEmitter<Lesson[]>();
 
-    setPutWordsExample() {
-        this.model = this.examplePutWords;
-    }
+  try() {
+    const lessons = JSON.parse(this.model);
+    this.tryLessons.emit(lessons);
+  }
+
+  setPutWordsExample() {
+    this.model = this.examples[this.select as keyof typeof this.examples];
+  }
 }

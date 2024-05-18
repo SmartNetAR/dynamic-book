@@ -1,3 +1,8 @@
-<textarea [(ngModel)]="model"></textarea>
+<div>
+    <textarea style="width: 600px;" rows="20" [(ngModel)]="model"></textarea>
+</div>
 <button (click)="try()">Try</button>
-<button (click)="setPutWordsExample()">PutWords Example</button>
+<select name="examples" id="examples" [(ngModel)]="select" (change)="setPutWordsExample()">
+    <option [value]="0" disabled selected="selected"></option>
+    <option *ngFor="let example of exampleOptions" [value]="example.value">{{example.label}}</option>
+</select>
