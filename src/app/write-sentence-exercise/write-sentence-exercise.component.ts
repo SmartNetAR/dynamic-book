@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ExerciseComponent } from '../exercise/exercise.component';
 import { TextUserResponse } from '../text-user-response';
 import { WriteQuestionsExercise } from '../write-questions-exercise';
@@ -10,15 +10,15 @@ import { WriteQuestionsExercise } from '../write-questions-exercise';
   templateUrl: './write-sentence-exercise.component.html',
   styleUrl: './write-sentence-exercise.component.css',
 })
-export class WriteSentenceExerciseComponent implements OnInit {
-  @Input() exercise!: any;
-  mappedExercise: any;
+export class WriteSentenceExerciseComponent {
+  mappedExercise!: WriteQuestionsExercise;
 
-  ngOnInit(): void {
+  @Input()
+  set exercise(value: WriteQuestionsExercise) {
     this.mappedExercise = {
-      ...this.exercise,
-      statementTip: this.getStatementTip(this.exercise),
-      expectedResponse: this.exercise.expectedResponse,
+      ...value,
+      statementTip: this.getStatementTip(value),
+      expectedResponse: value.expectedResponse,
     };
   }
 

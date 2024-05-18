@@ -100,7 +100,7 @@
     }
 
 </style>
-    @for (lesson of (lessons$ | async) ; track lesson.id) {
+    @for (lesson of lessons; track lesson.id) {
     <h1>{{ lesson.id }} {{ lesson.name }}</h1>
     <div style="display: flex; gap: 10px; align-items: baseline;">
         <h2>{{ lesson.sections.name }}</h2>

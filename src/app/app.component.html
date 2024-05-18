@@ -195,7 +195,9 @@
                     </clipPath>
                 </defs>
             </svg>
-            <app-lessons [url]="lessonUrl"></app-lessons>
+            @if (lessons) {
+                <app-lessons [lessons]="lessons"></app-lessons>
+            }
         </div>
         <div class="divider" role="separator" aria-label="Divider"></div>
         <div class="right-side">
@@ -242,7 +244,12 @@
                 </a>
             </div>
             <div>
-                <app-data-loader (urlChange)="handleChangeLessonUrl($event)"/>
+                <app-data-loader (urlChange)="getLessons($event)"/>
+            </div>
+            <div>
+                @if (lessons) {
+                <app-exercise-previewer [lessons]="lessons" (tryLessons)="setLessons($event)"></app-exercise-previewer>
+                }
             </div>
         </div>
     </div>
