@@ -36,11 +36,6 @@ export class AppComponent {
     });
   }
 
-  ngOnInit(): void {
-    const url = 'https://smartnetar.github.io/English-Book-Pre-intermediate/lessons.json';
-    this.getLessons(url);
-  }
-
   getLessons(url: string) {
     this.lessonService.getLessons(url)
       .subscribe((lessons: Lesson[]) => {

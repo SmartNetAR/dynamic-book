@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-loader',
@@ -14,8 +15,25 @@ export class DataLoaderComponent {
 
   @Output() urlChange = new EventEmitter<string>();
 
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['source']) {
+        this.url = params['source'];
+      }
+      this.urlChange.emit(this.url);
+    });
+  }
+
   handleUrlChange() {
-    this.urlChange.emit(this.url);
+    this.router.navigate([], {
+      queryParams: { source: this.url },
+      queryParamsHandling: 'merge'
+    });
   }
 
 
