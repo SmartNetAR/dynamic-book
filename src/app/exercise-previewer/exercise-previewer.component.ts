@@ -16,7 +16,8 @@ export class ExercisePreviewerComponent {
 
   exampleOptions = [
     { value: 'putWords', label: 'Put Words' },
-    { value: 'write-questions', label: 'Write Questions' }
+    { value: 'write-questions', label: 'Write Questions' },
+    { value: 'write-sentence', label: 'Write Sentence' }
   ];
 
   private examples = {
@@ -82,7 +83,36 @@ export class ExercisePreviewerComponent {
     }
   }
 ]`,
-  };
+    'write-sentence': `[
+  {
+    "id": "1B",
+    "name": "Charlotte's choice",
+    "sections": {
+      "id": 1,
+      "name": "grammar",
+      "title": "present simple",
+      "activities": [
+        {
+          "id": "a",
+          "title": "Write negative sentences.",
+          "type": "write-sentence",
+          "exercises": [
+            {
+              "id": 1,
+              "statement": "You get up early.",
+              "expectedResponse": "You don't get up early.",
+              "userResponse": {
+                "text": ""
+              },
+              "words": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+]`
+  }
 
   @Input()
   set lessons(value: Lesson[]) {

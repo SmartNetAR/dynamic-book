@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ExerciseComponent } from '../exercise/exercise.component';
-import { WriteQuestionsExercise } from '../write-questions-exercise';
 import { TextUserResponse } from '../text-user-response';
+import { WriteQuestionsExercise } from '../write-questions-exercise';
 
 @Component({
   selector: 'app-write-questions-exercise',
@@ -10,16 +10,16 @@ import { TextUserResponse } from '../text-user-response';
   templateUrl: './write-questions-exercise.component.html',
   styleUrl: './write-questions-exercise.component.css',
 })
-export class WriteQuestionsExerciseComponent implements OnInit {
-  @Input() exercise!: any;
-  mappedExercise: any
+export class WriteQuestionsExerciseComponent {
+  mappedExercise!: WriteQuestionsExercise
 
-  ngOnInit(): void {
+  @Input()
+  set exercise(value: WriteQuestionsExercise){
     this.mappedExercise = {
-      ...this.exercise,
-      statement: this.getStatementTip(this.exercise).text,
-      statementTip: this.getStatementTip(this.exercise),
-      expectedResponse: this.exercise.statement
+      ...value,
+      statement: this.getStatementTip(value).text,
+      statementTip: this.getStatementTip(value),
+      expectedResponse: value.statement
     }
   }
 
