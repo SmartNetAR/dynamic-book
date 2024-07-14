@@ -1,0 +1,7 @@
+@if ( activity && activity.type === "put-correct-words" ) {
+@for ( exercise of activity.exercises; track exercise.id) {
+<ul style="display: flex;">
+    <li>{{ exercise.words }}</li>
+</ul>
+}
+}

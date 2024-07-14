@@ -19,6 +19,7 @@ export class WriteSentenceExerciseComponent {
       ...value,
       statementTip: this.getStatementTip(value),
       expectedResponse: value.expectedResponse,
+      getWords: () => []
     };
   }
 

@@ -14,7 +14,7 @@ interface Sections {
   activities: Activity[];
 }
 
-interface Activity {
+export interface Activity {
   id: string;
   title: string;
   type: string;

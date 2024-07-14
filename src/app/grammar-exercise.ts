@@ -7,4 +7,5 @@ export interface GrammarExercise {
   statementTip: TextUserResponse;
   userResponse: UserResponse;
   expectedResponse: string;
+  getWords(): string[];
 }

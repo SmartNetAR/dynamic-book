@@ -15,13 +15,14 @@ export class ExercisePreviewerComponent {
   select = "";
 
   exampleOptions = [
-    { value: 'putWords', label: 'Put Words' },
+    { value: 'put-words', label: 'Put Words' },
     { value: 'write-questions', label: 'Write Questions' },
-    { value: 'write-sentence', label: 'Write Sentence' }
+    { value: 'write-sentence', label: 'Write Sentence' },
+    { value: 'put-correct-words', label: 'Put Correct Words' }
   ];
 
   private examples = {
-    putWords: `[
+    'put-words': `[
   {
     "id": "1A",
     "name": "Think positive - or negative",
@@ -111,7 +112,60 @@ export class ExercisePreviewerComponent {
       ]
     }
   }
-]`
+]`,
+  'put-correct-words': `[
+  {
+    "id": "3C",
+    "name": "What's the word?",
+    "sections": {
+      "id": 1,
+      "name": "vocabulary",
+      "title": "Useful expressions for explaining a word that you don't know.",
+      "activities": [
+        {
+          "id": "a",
+          "title": "Complete the useful expressions with these words.",
+          "type": "put-correct-words",
+          "exercises": [
+            {
+              "id": 1,
+              "statement": "It's the opposite of 'nice'.",
+              "words": [
+                "opposite"
+              ],
+              "expectedResponse": "",
+              "userResponse": {
+                "text": ""
+              }
+            },
+            {
+              "id": 2,
+              "statement": "It's a kind of fruit.",
+              "words": [
+                "kind"
+              ],
+              "expectedResponse": "",
+              "userResponse": {
+                "text": ""
+              }
+            },
+            {
+              "id": 3,
+              "statement": "It's like light, but you use it to describe hair.",
+              "words": [
+                "like"
+              ],
+              "expectedResponse": "",
+              "userResponse": {
+                "text": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]`,
   }
 
   @Input()

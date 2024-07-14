@@ -111,6 +111,7 @@
         @for (activity of lesson.sections.activities; track activity.id ) {
         <div class="activity">
             <h3>{{ activity.id }}. {{ activity.title }}</h3>
+            <app-activity-data [activity]="activity"></app-activity-data>
             @for ( exercise of activity.exercises; track exercise.id) {
                 @switch (activity.type) {
                     @case ("put-words") {
@@ -121,6 +122,9 @@
                     }
                     @case ("write-sentence") {
                         <app-write-sentence-exercise [exercise]="exercise"></app-write-sentence-exercise>
+                    }
+                    @case ("put-correct-words") {
+                        <app-put-correct-words-exercise [exercise]="exercise"></app-put-correct-words-exercise>
                     }
                 }
             }

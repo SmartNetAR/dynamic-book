@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { ExerciseComponent } from '../exercise/exercise.component';
+import { ExerciseComponent } from "../exercise/exercise.component";
 import { PutWordsExercise } from '../put-words-exercise';
 import { TextUserResponse } from '../text-user-response';
 
 @Component({
-  selector: 'app-put-words-exercise',
-  standalone: true,
-  imports: [ExerciseComponent],
-  templateUrl: './put-words-exercise.component.html',
-  styleUrl: './put-words-exercise.component.css',
+    selector: 'app-put-correct-words-exercise',
+    standalone: true,
+    templateUrl: './put-correct-words-exercise.component.html',
+    styleUrl: './put-correct-words-exercise.component.css',
+    imports: [ExerciseComponent]
 })
-export class PutWordsExerciseComponent {
+export class PutCorrectWordsExerciseComponent {
   mappedExercise!: PutWordsExercise;
 
   @Input()
@@ -20,7 +20,7 @@ export class PutWordsExerciseComponent {
       statement: this.getStatementTip(value).text,
       statementTip: this.getStatementTip(value),
       expectedResponse: value.statement,
-      getWords: () => value.words,
+      getWords: () => [],
     }
   }
 

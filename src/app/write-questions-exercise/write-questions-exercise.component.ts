@@ -19,7 +19,8 @@ export class WriteQuestionsExerciseComponent {
       ...value,
       statement: this.getStatementTip(value).text,
       statementTip: this.getStatementTip(value),
-      expectedResponse: value.statement
+      expectedResponse: value.statement,
+      getWords: () => value.words,
     }
   }
 

@@ -159,8 +159,8 @@
 
 <div style="display: flex; align-items: center; margin: 25px 0 10px;">
     <span>{{ exercise.id }}. {{ exercise.statement }}
-        @if (exercise.words.length) {
-        ( {{exercise.words.join(', ')}} )
+        @if (exercise.getWords && exercise.getWords().length) {
+        ( {{exercise.getWords().join(', ')}} )
         }
     </span>
     <app-copy-sentence-button (onClick)="handleClickCopy()"></app-copy-sentence-button>
