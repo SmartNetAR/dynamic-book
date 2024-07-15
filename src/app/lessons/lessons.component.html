@@ -100,15 +100,16 @@
     }
 
 </style>
-    @for (lesson of lessons; track lesson.id) {
-    <h1>{{ lesson.id }} {{ lesson.name }}</h1>
+@for (lesson of lessons; track lesson.id) {
+<h1>{{ lesson.id }} {{ lesson.name }}</h1>
+    @for (section of lesson.sections; track section.id) {
     <div style="display: flex; gap: 10px; align-items: baseline;">
-        <h2>{{ lesson.sections.name }}</h2>
-        <p>{{ lesson.sections.title }}</p>
+        <h2>{{ section.name }}</h2>
+        <p>{{ section.title }}</p>
     </div>
 
     <div>
-        @for (activity of lesson.sections.activities; track activity.id ) {
+        @for (activity of section.activities; track activity.id ) {
         <div class="activity">
             <h3>{{ activity.id }}. {{ activity.title }}</h3>
             <app-activity-data [activity]="activity"></app-activity-data>
@@ -132,3 +133,4 @@
         }
     </div>
     }
+}

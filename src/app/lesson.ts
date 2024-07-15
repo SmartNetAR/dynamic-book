@@ -4,10 +4,10 @@ import { WriteQuestionsExercise } from "./write-questions-exercise";
 export interface Lesson {
   id: string;
   name: string;
-  sections: Sections;
+  sections: Section[];
 }
 
-interface Sections {
+interface Section {
   id: number;
   name: string;
   title: string;
