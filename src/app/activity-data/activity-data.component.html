@@ -1,10 +1,3 @@
 @if ( activity && activity.type === "put-correct-words" ) {
-<!-- @for ( exercise of activity.exercises; track exercise.id) { -->
-<p>
-    {{getUniqueWords(activity.exercises).join(' | ')}}
-    <!-- @for (words of getUniqueWords(activity.exercises); track $index) {
-    <span>{{ words }}</span>
-    } -->
-</p>
-<!-- } -->
+<p>{{getUniqueWords(activity.exercises).join(' | ')}}</p>
 }
