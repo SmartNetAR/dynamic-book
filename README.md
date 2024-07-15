@@ -23,6 +23,7 @@ One free alternative to store and share your lesson content is through GitHub Pa
 Check out some examples of exercises created with the Dynamic Book App:
 
 - [English - Leson 1A Where are you from](https://smartnetar.github.io/book/?source=https:%2F%2Fsmartnetar.github.io%2FEnglish-Book-Pre-intermediate%2Flessons.json) | [Short](https://youtube.com/shorts/6UPFarN4s0E?feature=share)
+- [English - Leson 3C What's the word](https://smartnetar.github.io/book/?source=https:%2F%2Fsmartnetar.github.io%2FEnglish-Book-Pre-intermediate%2Flesson-3c-what-s-the-word-relative-clauses-expressions-for-paraphrasing)
 - [English - Leson 6A Where are you from](https://smartnetar.github.io/book/?source=https:%2F%2Fsmartnetar.github.io%2FEnglish-Book-Pre-intermediate%2Flessons6.json)
 
 #### External
